@@ -20,7 +20,23 @@ io.on('connection', (socket) => { // when a socket connects do this
     });
 
 
+    socket.on('with-ack-1', (arg1, arg2, callback) => { // receive request event from client and send acknowledgement
+        console.log(arg1); // { foo: 'bar' }
+        console.log(arg2); // 'baz'
+        callback({
+            status: 'ok'
+        });
+    });
 
+
+
+    socket.on('with-ack-2', (arg1, arg2, callback) => {// receive request event from client and send acknowledgement
+        console.log(arg1); // { foo: 'bar' }
+        console.log(arg2); // 'baz'
+        callback({
+            status: 'ok'
+        });
+    });
 
 
 

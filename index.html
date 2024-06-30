@@ -42,6 +42,23 @@
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
     });
+
+    socket.timeout(5000).emit('with-ack-1', { foo: 'bar' }, 'baz', (err, response) => { // sending an event to the server with an acknowledgement
+        if (err) {
+            // the server did not acknowledge the event in the given delay
+        } else {
+            console.log(response.status); // 'ok'
+        }
+    });
+
+
+
+    try {   // sending an event to the server with an acknowledgement
+        const response = await socket.timeout(5000).emitWithAck('with-ack-2', { foo: 'bar' }, 'baz');
+        console.log(response.status); // 'ok'
+    } catch (e) {
+        // the server did not acknowledge the event in the given delay
+    }
 </script>
 </body>
 </html>
