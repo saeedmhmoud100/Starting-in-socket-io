@@ -16,8 +16,13 @@ io.on('connection', (socket) => { // when a socket connects do this
 
 
     socket.on('chat message', (msg) => { // listen for chat message event
-        console.log(msg)
+        io.emit('chat message', msg); // emit chat message event to all connected sockets
     });
+
+
+
+
+
 
 
     socket.on('disconnect', () => {
