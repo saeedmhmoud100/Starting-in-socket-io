@@ -70,7 +70,7 @@ io.on('connection', (socket) => { // when a socket connects do this
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
-
+ ;
 });
 
 server.listen(3000, () => {
