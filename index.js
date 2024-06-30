@@ -5,7 +5,9 @@ const { Server } = require('socket.io');
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    connectionStateRecovery: {} // temporarily store all the events that are sent when disconnected and will try to restore the state of a client when it reconnects
+});
 
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'index.html'));
