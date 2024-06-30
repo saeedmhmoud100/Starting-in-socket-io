@@ -25,7 +25,11 @@
 </form>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    const socket = io("/"); // starting the socket to be listing in the server
+    const socket = io({
+        auth: {
+            serverOffset: 0
+        }
+    }); // starting the socket to be listing in the server
 
     const form = document.getElementById('form');
     const input = document.getElementById('input');
@@ -48,9 +52,12 @@
         appendMessage('You have connected');
     });
 
-    socket.on('chat message', (msg) => {
+    socket.on('chat message', (msg, serverOffset) => {
         appendMessage(msg); // listening to the event 'chat message' from the server
+        socket.auth.serverOffset = serverOffset;
     });
+
+
     socket.on('disconnect', (reason) => { // listening to the event 'disconnect' from the server
         appendMessage('You have been disconnected');
     });
